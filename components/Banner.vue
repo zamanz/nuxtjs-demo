@@ -24,6 +24,7 @@
                     </svg>
                     <span class="ms-1">যুক্ত হোন</span>
                 </button>
+                <nuxt-link to="/image">Image Upload</nuxt-link>
 
             </div>            
         </div>

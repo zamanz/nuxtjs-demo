@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 <div class="card-body p-0">
-                    <NuxtLink :to="`/${post.slug}`">
+                    <NuxtLink :to="`/post/${post.slug}`">
                         <img :src="post.image" v-if="post.image" class="card-img-top img-rounded" alt="Blog Image" loading="lazy">
                         <v-skeleton-loader type="image" v-else></v-skeleton-loader>
                         <h4 class="title my-3">{{ post.title }}</h4>
