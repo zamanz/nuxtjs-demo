@@ -76,6 +76,11 @@ export default {
             isLoading: false,
         }
     },
+    mounted() {
+        this.$nextTick(() => {
+            this.$nuxt.$loading = false
+        })
+    },
     methods: {
         async login() {
             let redirect = localStorage.getItem('auth.redirect') || '/';

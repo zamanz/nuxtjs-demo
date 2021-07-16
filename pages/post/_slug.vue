@@ -14,7 +14,7 @@
 
                                 <div class="post-image mb-5">
                                     <img
-                                        class="img-fluid"
+                                        class="img-fluid w-100"
                                         :src="post.image"
                                         alt=""
                                         v-if="post.image"
