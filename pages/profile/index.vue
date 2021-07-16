@@ -46,7 +46,7 @@
                                             {{ user.email }}
                                         </p>
                                     </td>
-                                    <td>
+                                    <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
                                         <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
                                     </td>
                                 </tr>
