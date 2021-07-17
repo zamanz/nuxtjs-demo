@@ -48,15 +48,19 @@ export default {
         // https://vuetifyjs.com
         "@nuxtjs/vuetify",
         // https://go.nuxtjs.dev/tailwindcss
-        "@nuxtjs/tailwindcss"
+        "@nuxtjs/tailwindcss",
+        // https://pwa.nuxtjs.org/
+        "@nuxtjs/pwa",
     ],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
+        //https://i18n.nuxtjs.org/
         "nuxt-i18n",
+        // https://auth.nuxtjs.org/
         "@nuxtjs/auth",
         // https://go.nuxtjs.dev/axios
-        "@nuxtjs/axios"
+        "@nuxtjs/axios",
     ],
 
     i18n: {
@@ -132,6 +136,18 @@ export default {
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
         baseURL: "http://laravel-practice.test/api/v1"
+    },
+
+    pwa: {
+        meta: {
+          title: 'Simple Nuxt Experimental Project',
+          author: 'Zaman',
+        },
+        manifest: {
+          name: 'Nuxt.js PWA are so easy',
+          short_name: 'Nuxt.js PWA',
+          lang: 'en',
+        },
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
