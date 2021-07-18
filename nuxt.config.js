@@ -135,7 +135,7 @@ export default {
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
-        baseURL: "http://laravel-practice.test/api/v1"
+        baseURL: process.env.NODE_ENV === "production" ? "http://api.kzaman.me" :"http://laravel-practice.test/api/v1"
     },
 
     pwa: {
