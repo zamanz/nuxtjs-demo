@@ -1,4 +1,4 @@
-# nuxtjs-demo
+# Nuxt Practice
 
 ## Build Setup
 

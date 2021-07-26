@@ -1,17 +1,23 @@
 <template>
     <div>
-        <div class="container mx-auto px-4 sm:px-8">
+        <div class="container mx-auto">
             <div class="py-8">
                 <div>
                     <h2 class="text-2xl font-semibold leading-tight">Profile List</h2>
+                    <div class="mt-2">
+                        {{ userIds }}
+                    </div>
                 </div>
-                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div class="py-4 overflow-x-auto">
                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                         <table class="min-w-full leading-normal">
                             <thead>
                                 <tr>
-                                    <th class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        #
+                                    <th class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 font-semibold text-gray-600 uppercase tracking-wider">
+                                        <label class="inline-flex items-center">
+                                            <span class="pe-1">SL</span>
+                                            <input type="checkbox" class="form-checkbox w-4 h-4 text-green-600" @click="selectAllUser" v-model="allSelectedUser">
+                                        </label>
                                     </th>
                                     <th class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                         Name
@@ -27,7 +33,10 @@
                             <tbody>
                                 <tr v-for="(user, index) in users" :key="user.id">
                                     <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
-                                        {{ index + 1 }}.
+                                        <label class="inline-flex items-center">
+                                            <span class="pe-1">{{ index + 1 }}.</span>
+                                            <input type="checkbox" class="form-checkbox w-4 h-4 text-green-600" v-model="userIds" @click="selectUser" :value="user.id">
+                                        </label>
                                     </td>
                                     <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
                                         <NuxtLink :to="`/profile/${user.username}`" class="flex items-center no-underline hover:underline">
@@ -61,9 +70,31 @@
 
 <script>
     export default {
+        data(){
+            return {
+                allSelectedUser: false,
+                userIds: []
+            }
+        },
         computed:{
             users(){
                 return this.$store.getters.getUsers
+            }
+        },
+        methods: {
+            selectAllUser() {
+                this.userIds = [];
+                if (this.allSelectedUser) {
+                    this.allSelectedUser = false;
+                }
+                else{
+                    this.users.forEach(user => {
+                        this.userIds.push(user.id.toString());
+                    })
+                }
+            },
+            selectUser() {
+                this.allSelectedUser = false;
             }
         }
     }
