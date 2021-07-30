@@ -5,7 +5,11 @@
                 <ErrorCode :code="error.statusCode"/>
                 <h3>Oops! Something went wrong.</h3>
                 <p>{{ error.message }}</p>
-                <a href="/" class="btn btn-success d-inline-flex">Go to Home</a>
+                <div class="d-flex justify-content-center align-items-center">
+                    <a href="/" class="btn btn-success mx-2">Go to Home</a>
+                    <button type="button" @click="reload" class="btn btn-info mx-2 text-light">Reload</button>
+                    <button type="button" @click="goBack" class="btn btn-secondary mx-2 text-light">Go Back</button>
+                </div>
             </div>
         </div>
     </div>
@@ -16,6 +20,14 @@ export default {
     props:["error"],
     created(){
         console.log("[Error Details: ]",this.error);
+    },
+    methods:{
+        reload(){
+            window.location.reload()
+        },
+        goBack(){
+            console.log('Go Back')
+        }
     }
 
 }
