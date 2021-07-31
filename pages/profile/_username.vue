@@ -76,12 +76,12 @@
                     <b-modal ref="upload-file-modal" title="Upload docs file" hide-footer>
                         <form class="p-0" @submit.prevent="submittedAttachmentWithFile" enctype="multipart/form-data" method="POST">
                             <div class="form-group">
-                                <label for="memo-list">Attachment</label>
+                                <label for="memo-list" class="mb-2">Attachment</label>
                                 <input type="file" class="form-control d-block" multiple @change="uploadAttachment">
                             </div>
 
                             <div class="my-3">
-                                <h6 class="d-flex justify-content-between align-items-center attachment-file mb-2" v-for="(attachment_file, index) in attachment_files" :key="index">
+                                <h6 class="d-flex justify-content-between align-items-center attachment-file mb-2" v-for="(attachment_file, index) in selected_attachment" :key="index">
                                     <span>{{ attachment_file.name }}</span>
                                     <span class="btn btn-sm btn-danger" @click="removeAttachment(index)">
                                         Remove
@@ -108,7 +108,6 @@ export default {
             user: null,
             imgSrc: '',
             cropImg: '',
-            attachment_files: [],
             selected_attachment:[]
         }
     },
@@ -117,7 +116,6 @@ export default {
     },
     mounted(){
         this.imgSrc = require('@/assets/images/default.jpg')
-        //this.getUser();
     },
     methods:{
         getUser() {
@@ -211,16 +209,15 @@ export default {
             this.selected_attachment = []
         },
         uploadAttachment(event){
-            event.target.files.forEach(item =>{
-                this.attachment_files.push(item)
-            })
-
             for(let i = 0; i < event.target.files.length; i++){
                 if (typeof FileReader === "function") {
                     const reader = new FileReader();
 
                     reader.onload = (e) => {
-                        this.selected_attachment.push(e.target.result)
+                        this.selected_attachment.push({
+                            name: event.target.files[i].name,
+                            base64: e.target.result
+                        })
                     };
 
                     reader.readAsDataURL(event.target.files[i]);
@@ -236,15 +233,15 @@ export default {
         },
         submittedAttachmentWithFile(){
             this.$axios.$post('upload-docs-file', {
-                docs_file: this.selected_attachment
+                attachments: this.selected_attachment
             }).then(response =>{
-                this.$refs['upload-file-modal'].hide()
+                //this.$refs['upload-file-modal'].hide()
                 this.$notifier.snackBar(response, 'bg-success')
                 console.log(response)
             }).catch(error =>{
                 console.log(error)
             })
-            console.log('submittedAttachmentWithFile', this.selected_files)
+            console.log('submittedAttachmentWithFile', this.selected_attachment)
         }
     }
 }
