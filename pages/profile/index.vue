@@ -16,7 +16,7 @@
                                     <th class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 font-semibold text-gray-600 uppercase tracking-wider">
                                         <label class="inline-flex items-center">
                                             <span class="pe-1">SL</span>
-                                            <input type="checkbox" class="form-checkbox w-4 h-4 text-green-600" @click="selectAllUser" v-model="allSelectedUser">
+                                            <input v-model="allSelectedUser" type="checkbox" class="form-checkbox w-4 h-4 text-green-600" @click="selectAllUser">
                                         </label>
                                     </th>
                                     <th class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -35,7 +35,7 @@
                                     <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">
                                         <label class="inline-flex items-center">
                                             <span class="pe-1">{{ index + 1 }}.</span>
-                                            <input type="checkbox" class="form-checkbox w-4 h-4 text-green-600" v-model="userIds" @click="selectUser" :value="user.id">
+                                            <input v-model="userIds" type="checkbox" class="form-checkbox w-4 h-4 text-green-600" :value="user.id" @click="selectUser">
                                         </label>
                                     </td>
                                     <td class="px-3 py-2 border-b border-gray-200 bg-white text-sm">

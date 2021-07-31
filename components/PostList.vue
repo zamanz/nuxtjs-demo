@@ -1,7 +1,7 @@
 <template>
     <div class="post__list">
         <div v-if="posts.length > 0" ref="postList">
-            <div class="card h-100 border-0 mb-3 bg-transparent post" v-for="(post) in posts" :key="post.id">
+            <div v-for="(post) in posts" :key="post.id" class="card h-100 border-0 mb-3 bg-transparent post">
                 <div class="card-header d-flex justify-content-between p-0 mb-2 border-0 bg-transparent">
                     <a class="avatar d-flex align-items-center" href="#">
                         <img :src="`https://ui-avatars.com/api/?background=random&name=${post.user.name}`" class="img-circle" alt="Profile Image">
@@ -25,14 +25,14 @@
                 </div>
                 <div class="card-body p-0">
                     <NuxtLink :to="`/post/${post.slug}`">
-                        <img :src="post.image" v-if="post.image" class="card-img-top img-rounded" alt="Blog Image" loading="lazy">
-                        <v-skeleton-loader type="image" v-else></v-skeleton-loader>
+                        <img v-if="post.image" :src="post.image" class="card-img-top img-rounded" alt="Blog Image" loading="lazy">
+                        <v-skeleton-loader v-else type="image"></v-skeleton-loader>
                         <h4 class="title my-3">{{ post.title }}</h4>
                     </NuxtLink>
                     
                     <p>Time: {{ post.posted }}</p>
                     <ul class="nav mb-2">
-                        <li class="mx-1" v-for="(tag, index) in post.tags" :key="index">
+                        <li v-for="(tag, index) in post.tags" :key="index" class="mx-1">
                             <NuxtLink :to="`/tags/${tag.slug}`">#{{ tag.name }}</NuxtLink>
                         </li>
                     </ul>
@@ -41,13 +41,13 @@
             </div>
 
             <div class="d-flex justify-content-center align-items-center col-md-12">
-                <div class="spinner-border text-success" role="status" v-if="isLoding">
+                <div v-if="isLoding" class="spinner-border text-success" role="status">
                 </div>
             </div>
         </div>
-        <div class="row" v-else>
+        <div v-else class="row">
 
-            <div class="card h-100 border-0 mb-3 bg-transparent post" v-for="(item, index) in 6" :key="index">
+            <div v-for="(item, index) in 6" :key="index" class="card h-100 border-0 mb-3 bg-transparent post">
                 <div class="card-header d-flex justify-content-between p-0 mb-2 border-0 bg-transparent">
                     <div class="col-6 p-0 d-flex align-items-center">
                         <v-skeleton-loader type="avatar"></v-skeleton-loader>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center py-2">
-            <a class="btn btn-success" href="#" @click.prevent="loadMore" v-if="!isLoding"><b>LOAD MORE</b></a>
+            <a v-if="!isLoding" class="btn btn-success" href="#" @click.prevent="loadMore"><b>LOAD MORE</b></a>
         </div>
     </div>
 </template>
@@ -101,10 +101,10 @@ export default {
         },
         getNextPosts() {
             
-            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+            const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
             if (bottomOfWindow) {
                 this.isLoding = true;
-                let page = this.next_page++;
+                const page = this.next_page++;
                 this.$axios.$get('/posts?page='+ page).then((response) => {
                     this.posts.push(...response.posts.data)
                     this.isLoding = false;
@@ -114,7 +114,7 @@ export default {
 
         loadMore() {
             this.isLoding = true;
-            let page = this.next_page++;
+            const page = this.next_page++;
             this.$axios.$get('/posts?page='+ page).then((response) => {
                 this.posts.push(...response.posts.data)
                 this.isLoding = false;

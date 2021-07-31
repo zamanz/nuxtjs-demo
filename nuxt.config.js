@@ -43,6 +43,8 @@ export default {
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
+        // https://go.nuxtjs.dev/eslint
+        '@nuxtjs/eslint-module',
         // https://bootstrap-vue.org
         'bootstrap-vue/nuxt',
         // https://vuetifyjs.com
@@ -55,7 +57,7 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        //https://i18n.nuxtjs.org/
+        // https://i18n.nuxtjs.org/
         "nuxt-i18n",
         // https://auth.nuxtjs.org/
         "@nuxtjs/auth",
@@ -140,19 +142,19 @@ export default {
 
     pwa: {
         meta: {
-          title: 'Simple Nuxt Experimental Project',
-          author: 'Zaman',
+            title: 'Simple Nuxt Experimental Project',
+            author: 'Zaman',
         },
         manifest: {
-          name: 'Nuxt.js PWA are so easy',
-          short_name: 'Nuxt.js PWA',
-          lang: 'en',
+            name: 'Nuxt.js PWA are so easy',
+            short_name: 'Nuxt.js PWA',
+            lang: 'en',
         },
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        //use for only bootstrap compile warning
+        // use for only bootstrap compile warning
         babel: {
             compact: true
         },

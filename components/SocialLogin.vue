@@ -2,10 +2,10 @@
     <div class="social_btn">
         <button class="btn btn-secondary github w-100 mb-2 p-2 d-flex align-items-center justify-content-center" @click="loginGithub">
             <v-progress-circular 
+                v-if="isGithub"
                 indeterminate
                 color="primary"
                 :size="20"
-                v-if="isGithub"
                 class="mx-1"
             >
             </v-progress-circular>
@@ -17,10 +17,10 @@
         </button>
         <button class="btn btn-primary w-100 facebook mb-2 p-2 d-flex align-items-center justify-content-center" type="button" @click.prevent="loginFacebook">
             <v-progress-circular 
+                v-if="isFacebook"
                 indeterminate
                 color="primary"
                 :size="20"
-                v-if="isFacebook"
                 class="mx-1"
             >
             </v-progress-circular>
@@ -34,10 +34,10 @@
         </button>
         <button class="btn btn-danger google w-100 p-2 d-flex align-items-center justify-content-center" @click="loginGoogle">
             <v-progress-circular 
+                v-if="isGoogle"
                 indeterminate
                 color="primary"
                 :size="20"
-                v-if="isGoogle"
                 class="mx-1"
             >
             </v-progress-circular>

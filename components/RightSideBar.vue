@@ -1,11 +1,11 @@
 <template>
     <div class="card bg-transparent border-0">
 
-        <div class="card-body p-0" v-if="!$auth.loggedIn">
+        <div v-if="!$auth.loggedIn" class="card-body p-0">
             <h4>লগইন করুন</h4>
             <SocialLogin />
         </div>
-        <div class="card-body p-0" v-else>
+        <div v-else class="card-body p-0">
             <h4 class="user__link p-3">
                 <span class="d-flex align-items-center px-3">{{ $auth.user.name }}</span>    
             </h4>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div v-else>
-                <div class="d-flex align-items-center mb-2" v-for="(item, index) in 10" :key="index">
+                <div v-for="(item, index) in 10" :key="index" class="d-flex align-items-center mb-2">
                     <v-skeleton-loader type="avatar"></v-skeleton-loader>
                     <v-skeleton-loader type="sentences" width="150" class="ms-2"></v-skeleton-loader>
                 </div>

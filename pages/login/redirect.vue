@@ -6,8 +6,8 @@
 
 <script>
     export default {
-        middleware:'auth',
         layout:'empty',
+        middleware:'auth',
         redirect:false,
         data(){
             return {
@@ -28,7 +28,7 @@
         methods:{
             async loginSubmit(data){
                 try {
-                    await this.$auth.loginWith('local', { data: data });
+                    await this.$auth.loginWith('local', { data });
                     this.$router.push("/profile/"+this.$auth.user.username);
                 }
                 catch (error) {

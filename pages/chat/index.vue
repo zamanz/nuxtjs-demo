@@ -5,7 +5,7 @@
                 <div class="flex flex-col space-y-4 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
                     <div v-if="users.length > 0">
                         <div v-for="(user, index) in users" :key="index" class="mb-2">
-                            <NuxtLink :to="`/chat?user=${user.username}`" class="text-decoration-none text-dark" v-if="$auth.user.id != user.id">
+                            <NuxtLink v-if="$auth.user.id != user.id" :to="`/chat?user=${user.username}`" class="text-decoration-none text-dark">
                                 <div class="d-flex align-items-center">
                                     <img :src="`https://ui-avatars.com/api/?background=random&name=${user.name}`" class="rounded-full" alt="Profile Image">
                                     <div class="ms-3">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="d-flex align-items-center mb-2" v-for="(item, index) in 10" :key="index">
+                        <div v-for="(item, index) in 10" :key="index" class="d-flex align-items-center mb-2">
                             <v-skeleton-loader type="avatar"></v-skeleton-loader>
                             <v-skeleton-loader type="sentences" width="150" class="ms-2"></v-skeleton-loader>
                         </div>
@@ -47,7 +47,7 @@
         middleware: 'auth',
         data(){
             return {
-                user: ''
+                selectedUser: ''
             }
         },
         computed:{
@@ -57,7 +57,7 @@
         },
         methods:{
             selected(user){
-                this.user = user
+                this.selectedUser = user
             }
         }
     }

@@ -2,14 +2,14 @@
     <div class="text-center ma-2">
         <v-snackbar v-model="show" :color="color" :timeout="timeout">
             {{ message }}
-            <template v-slot:action="{ attrs }">
+            <template #action="{ attrs }">
                 <button
                     type="button"
                     color="pink"
                     text
                     v-bind="attrs"
-                    @click="show = false"
                     class="btn me-1 text-danger"
+                    @click="show = false"
                 >
                     Close
                 </button>

@@ -7,8 +7,8 @@
                 <p>{{ error.message }}</p>
                 <div class="d-flex justify-content-center align-items-center">
                     <a href="/" class="btn btn-success mx-2">Go to Home</a>
-                    <button type="button" @click="reload" class="btn btn-info mx-2 text-light">Reload</button>
-                    <button type="button" @click="goBack" class="btn btn-secondary mx-2 text-light">Go Back</button>
+                    <button type="button" class="btn btn-info mx-2 text-light" @click="reload">Reload</button>
+                    <button type="button" class="btn btn-secondary mx-2 text-light" @click="goBack">Go Back</button>
                 </div>
             </div>
         </div>
@@ -17,7 +17,12 @@
 <script>
 export default {
     name: "Error",
-    props:["error"],
+    props:{
+        error:{
+            default: null,
+            type: [Object]
+        },
+    },
     created(){
         console.log("[Error Details: ]",this.error);
     },

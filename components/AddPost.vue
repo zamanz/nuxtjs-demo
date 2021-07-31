@@ -2,7 +2,7 @@
     <div class="card bg-transparent border-0 mb-3">
         <div class="card-body p-0">
             <div v-if="$auth.loggedIn">
-                <textarea name="" id="" rows="3" class="form-control"></textarea>
+                <textarea name="" rows="3" class="form-control"></textarea>
             </div>
             <div v-else>
                 <p>Login</p>

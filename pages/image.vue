@@ -19,7 +19,7 @@
                         preview=".preview"
                     />
                 </div>
-                <div class="actions" v-if="imgSrc">
+                <div v-if="imgSrc" class="actions">
                     <a href="#" role="button" @click.prevent="zoom(0.2)"> Zoom In </a>
                     <a href="#" role="button" @click.prevent="zoom(-0.2)"> Zoom Out </a>
                     <a href="#" role="button" @click.prevent="move(-10, 0)">Move Left</a>
@@ -39,7 +39,7 @@
                 </div>
 
             </section>
-            <section class="preview-area" v-if="imgSrc">
+            <section v-if="imgSrc" class="preview-area">
                 <p>Preview</p>
                 <div class="preview m-auto"></div>
                 <p>Cropped Image</p>
@@ -96,7 +96,7 @@ export default {
         setImage(e) {
             const file = e.target.files[0];
 
-            if (file.type.indexOf("image/") === -1) {
+            if (!file.type.includes("image/")) {
                 alert("Please select an image file");
                 return;
             }

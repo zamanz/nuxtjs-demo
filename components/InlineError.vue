@@ -1,10 +1,19 @@
 <template>
     <span class="text-danger">
-        <small class="form-text text-danger" v-for="(error,index) in errors" :key="index">{{ error[field] }}</small>
+        <small v-for="(error,index) in errors" :key="index" class="form-text text-danger">{{ error[field] }}</small>
     </span>
 </template>
 <script>
 export default {
-    props:["errors","field"],
+    props:{
+        errors:{
+            default: null,
+            type: Array
+        },
+        field:{
+            default: null,
+            type: String
+        }
+    },
 }
 </script>

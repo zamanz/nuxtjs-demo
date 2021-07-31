@@ -34,7 +34,7 @@ export const actions = {
             const data = await this.$axios.$get("init");
             commit('setTags', data.tags)
             commit('setUsers', data.users)
-            //console.log('Init Data',data)
+            // console.log('Init Data',data)
         }catch(err){
             console.log(err.response);
         }

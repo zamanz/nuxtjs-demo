@@ -71,9 +71,9 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item" v-if="$auth.loggedIn">
+                                <li v-if="$auth.loggedIn" class="nav-item">
                                     <div class="dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a id="dropdownMenuButton1" href="#" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span>{{ $auth.user.name }}</span>
                                         </a>
                                         <ul class="dropdown-menu user_dropdown shadow py-0" aria-labelledby="dropdownMenuButton1">
@@ -128,7 +128,7 @@
                                     </div>
                                 </li>
 
-                                <li class="nav-item" v-else>
+                                <li v-else class="nav-item">
                                     <NuxtLink class="nav-link d-flex align-items-center justify-content-center pe-0" to="/login">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
                                             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>

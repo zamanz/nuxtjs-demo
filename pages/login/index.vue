@@ -18,27 +18,27 @@
                                 <p>Use your Email Address</p>
                             </div>
 
-                            <form @submit.prevent="login" class="p-1">
+                            <form class="p-1" @submit.prevent="login">
                                 
                                 <div class="form-group">
                                     <v-text-field
+                                        v-model="form.email"
                                         label="Email Addrsss"
                                         outlined
-                                        v-model="form.email"
                                         type="text"
                                     ></v-text-field>
-                                    <InlineError :errors="errors" v-if="errors" field="email" />
+                                    <InlineError v-if="errors" :errors="errors"  field="email" />
                                 </div>
                                 <div class="form-group mt-4">
                                         <v-text-field
+                                        v-model="form.password"
                                         label="Password"
                                         outlined
                                         :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                                        v-model="form.password"
                                         :type="show ? 'text' : 'password'"
                                         @click:append="show = !show"
                                     ></v-text-field>
-                                    <InlineError :errors="errors" v-if="errors" field="password" />
+                                    <InlineError v-if="errors" :errors="errors" field="password" />
                                 </div>
 
                                 <p class="mt-5 mb-0">Not your computer? Then use guest mode to sign in personally</p>
@@ -60,9 +60,6 @@
 <script>
 export default {
     layout: 'empty',
-    head: {
-        title: 'Login'
-    },
     middleware: 'guest',
     data() {
         return {
@@ -76,6 +73,9 @@ export default {
             isLoading: false,
         }
     },
+    head: {
+        title: 'Login'
+    },
     mounted() {
         this.$nextTick(() => {
             this.$nuxt.$loading = false
@@ -83,7 +83,7 @@ export default {
     },
     methods: {
         async login() {
-            let redirect = localStorage.getItem('auth.redirect') || '/';
+            const redirect = localStorage.getItem('auth.redirect') || '/';
             this.isLoading = true;
             console.log()
             try {

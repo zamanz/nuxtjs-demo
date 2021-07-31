@@ -1,5 +1,5 @@
 <template>
-    <div class="preloader" v-if="isLoading">
+    <div v-if="isLoading" class="preloader">
         <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status"></div>
     </div>
 </template>

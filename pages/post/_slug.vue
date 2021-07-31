@@ -14,13 +14,13 @@
 
                                 <div class="post-image mb-5">
                                     <img
+                                        v-if="post.image"
                                         class="img-fluid w-100"
                                         :src="post.image"
                                         alt=""
-                                        v-if="post.image"
                                         loading="lazy"
                                     />
-                                    <v-skeleton-loader type="image" v-else></v-skeleton-loader>
+                                    <v-skeleton-loader v-else type="image"></v-skeleton-loader>
                                 </div>
 
                                 <div class="post-info">
@@ -28,24 +28,24 @@
                                     <div class="left-area">
                                         <a class="avatar d-flex align-items-center justify-content-center" href="#">
                                             <img v-if="post.user" :src="`https://ui-avatars.com/api/?background=random&name=${post.user.name}`" alt="Profile Image">
-                                            <v-skeleton-loader type="avatar" v-else></v-skeleton-loader>
+                                            <v-skeleton-loader v-else type="avatar"></v-skeleton-loader>
                                         </a>
                                     </div>
                             
 
                                     <div class="middle-area">
-                                        <a class="name" href="#" v-if="post.user"><b>{{ post.user.name }}</b></a>
-                                        <v-skeleton-loader type="sentences" v-else></v-skeleton-loader>
-                                        <h6 class="date" v-if="post.posted">on {{ post.posted }}</h6>
+                                        <a v-if="post.user" class="name" href="#"><b>{{ post.user.name }}</b></a>
+                                        <v-skeleton-loader v-else type="sentences"></v-skeleton-loader>
+                                        <h6 v-if="post.posted" class="date">on {{ post.posted }}</h6>
                                     </div>
 
                                 </div><!-- post-info -->
 
-                                <h3 class="title" v-if="post.title">{{ post.title }}</h3>
-                                <v-skeleton-loader type="sentences" v-else></v-skeleton-loader>
+                                <h3 v-if="post.title" class="title">{{ post.title }}</h3>
+                                <v-skeleton-loader v-else type="sentences"></v-skeleton-loader>
 
-                                <div class="para" v-if="post.body">
-                                    <p v-html="post.body"></p>
+                                <div v-if="post.body" class="para">
+                                    <p>{{ post.body }}</p>
                                 </div>
                                 <div v-else>
                                     <v-skeleton-loader type="paragraph"></v-skeleton-loader>
@@ -55,21 +55,21 @@
                                 </div>
 
                                 <ul class="tags">
-                                    <li><a href="#" v-for="(tag, index) in post.tags" :key="index">{{ tag.name }}</a></li>
+                                    <li><a v-for="(tag, index) in post.tags" :key="index" href="#" >{{ tag.name }}</a></li>
                                 </ul>
 
                                 <div class="d-flex justify-content-start align-items-center">
                                     <ul class="tags m-0">
-                                        <li class="page-item" v-if="prev">
+                                        <li v-if="prev" class="page-item">
                                             <a class="page-link" href="#" @click.prevent="previous">&larr; Older</a>
                                         </li>
-                                        <li class="page-item disabled" v-else>
+                                        <li v-else class="page-item disabled">
                                             <a class="page-link" href="#">&larr; Older</a>
                                         </li>
-                                        <li class="page-item" v-if="next">
+                                        <li v-if="next" class="page-item">
                                             <a class="page-link" href="#" @click.prevent="nextPost">Newer &rarr;</a>
                                         </li>
-                                        <li class="page-item disabled" v-else>
+                                        <li v-else class="page-item disabled">
                                             <a class="page-link" href="#">&larr; Older</a>
                                         </li>
                                     </ul>
@@ -111,20 +111,20 @@
                                 <div class="row">
 
                                     <div class="col-sm-6">
-                                        <input type="text" aria-required="true" v-model="form.name" name="contact-form-name" class="form-control"
+                                        <input v-model="form.name" type="text" aria-required="true" name="contact-form-name" class="form-control"
                                             placeholder="Enter your name" aria-invalid="true" required >
                                     </div><!-- col-sm-6 -->
                                     <div class="col-sm-6">
-                                        <input type="email" aria-required="true" v-model="form.email" name="contact-form-email" class="form-control"
+                                        <input v-model="form.email" type="email" aria-required="true" name="contact-form-email" class="form-control"
                                             placeholder="Enter your email" aria-invalid="true" required>
                                     </div><!-- col-sm-6 -->
 
                                     <div class="col-sm-12">
-                                        <textarea name="contact-form-message" v-model="form.body" rows="2" class="text-area-messge form-control"
+                                        <textarea v-model="form.body" name="contact-form-message" rows="2" class="text-area-messge form-control"
                                             placeholder="Enter your comment" required></textarea >
                                     </div><!-- col-sm-12 -->
                                     <div class="col-sm-12">
-                                        <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                                        <button id="form-submit" class="submit-btn" type="submit"><b>POST COMMENT</b></button>
                                     </div><!-- col-sm-12 -->
 
                                 </div><!-- row -->
@@ -135,33 +135,33 @@
 
                         <div class="commnets-area">
 
-                            <div class="comment" v-for="(comment, index) in post.comments" :key="comment.id">
+                            <div v-for="(comment, index) in post.comments" :key="comment.id" class="comment">
 
                                 <div class="post-info">
 
                                     <div class="left-area">
                                         <a class="avatar d-flex justify-content-center align-items-center" href="#">
                                             <img v-if="comment.user" :src="`https://ui-avatars.com/api/?background=random&name=${comment.user.name}`" alt="Profile Image">
-                                            <v-skeleton-loader type="avatar" v-else></v-skeleton-loader>
+                                            <v-skeleton-loader v-else type="avatar"></v-skeleton-loader>
                                         </a>
                                         
                                     </div>
 
                                     <div class="middle-area">
-                                        <a class="name" href="#" v-if="comment.user"><b>{{ comment.user.name }}</b></a>
+                                        <a v-if="comment.user" class="name" href="#"><b>{{ comment.user.name }}</b></a>
                                         <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
                                     </div>
 
                                     <div class="right-area">
                                         <h5 class="reply-btn"><a href="#">Reply</a></h5>
-                                        <h5 class="reply-btn" v-if="$auth.loggedIn">
-                                            <a href="#" @click.prevent="deleteComment(comment, index)" v-if="comment.user.id === $auth.user.id">Delete</a>
+                                        <h5 v-if="$auth.loggedIn" class="reply-btn">
+                                            <a v-if="comment.user.id === $auth.user.id" href="#" @click.prevent="deleteComment(comment, index)" >Delete</a>
                                         </h5>
                                     </div>
 
                                 </div><!-- post-info -->
 
-                                <p v-html="comment.body"></p>
+                                <p>{{ comment.body }}</p>
 
                             </div>
 
@@ -175,19 +175,6 @@
 
             </div><!-- container -->
         </section>
-        <template>
-            <div class="text-center my-2">
-                <v-btn
-                    dark
-                    color="orange darken-2"
-                    @click="snackbar = true"
-                >
-                    Open Snackbar
-                </v-btn>
-
-                <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
-            </div>
-        </template>
     </div>
     <!-- /.container -->
 </template>
@@ -218,7 +205,7 @@ export default {
     },
     mounted(){
         
-        //window.addEventListener('scroll', this.getNextPost)
+        // window.addEventListener('scroll', this.getNextPost)
     },
     methods:{
         randomNumber(){

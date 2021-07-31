@@ -14,33 +14,33 @@
                         <div class="card-body p-4">
                             <p class="text-center">Sign up to start your session</p>
 
-                            <form @submit.prevent="register" class="p-1">
+                            <form class="p-1" @submit.prevent="register">
                                 <div class="form-group mt-2">
                                     <label for="name">Name:</label>
-                                    <input id="name" type="text" class="form-control" v-model="form.name" placeholder="Name">
-                                    <InlineError :errors="errors" v-if="errors" field="name" />
+                                    <input id="name" v-model="form.name" type="text" class="form-control" placeholder="Name">
+                                    <InlineError v-if="errors" :errors="errors" field="name" />
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="email">Email Address:</label>
-                                    <input id="email" type="email" class="form-control" v-model="form.email" placeholder="Email Address">
-                                    <InlineError :errors="errors" v-if="errors" field="email" />
+                                    <input id="email" v-model="form.email" type="email" class="form-control" placeholder="Email Address">
+                                    <InlineError v-if="errors" :errors="errors" field="email" />
                                 </div>
 
                                 <div class="form-group mt-3">
                                     <label for="password">Password:</label>
-                                    <input id="password" type="password" class="form-control" v-model="form.password" placeholder="Password" autocomplete="current-password">
-                                    <InlineError :errors="errors" v-if="errors" field="password" />
+                                    <input id="password" v-model="form.password" type="password" class="form-control" placeholder="Password" autocomplete="current-password">
+                                    <InlineError v-if="errors" :errors="errors" field="password" />
                                 </div>
 
                                 <div class="form-group my-3">
                                     <label for="password_confirmation">Confirm Password:</label>
-                                    <input id="password_confirmation" type="password" class="form-control" v-model="form.password_confirmation" placeholder="Confirm Password">
+                                    <input id="password_confirmation" v-model="form.password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
                                 </div>
 
                                 <div class="d-flex justify-content-between">
                                     <nuxt-link to="/login">Login</nuxt-link>
-                                    <button type="submit" class="btn btn-success text-light" v-if="!isLoading">Register</button>
-                                    <button type="button" class="btn btn-success" v-else disabled>Loading</button>
+                                    <button v-if="!isLoading" type="submit" class="btn btn-success text-light">Register</button>
+                                    <button v-else type="button" class="btn btn-success" disabled>Loading</button>
                                 </div>
                             </form>
                         </div>
@@ -56,9 +56,6 @@
 export default {
     name: 'Register',
     layout:'empty',
-    head:{
-        title: 'Register'
-    },
     middleware:'guest',
     data(){
         return {
@@ -72,8 +69,8 @@ export default {
             isLoading : false
         }
     },
-    mounted(){
-
+    head:{
+        title: 'Register'
     },
     methods:{
         register(){

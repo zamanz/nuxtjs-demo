@@ -1,18 +1,18 @@
 <template>
-    <div class="flex-1 justify-between flex flex-col h-screen" v-if="user != null">
+    <div v-if="user != null" class="flex-1 justify-between flex flex-col h-screen">
         <div class="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200">
             <div class="flex items-center space-x-4">
                 <img
+                    v-if="user.name"
                     :src="`https://ui-avatars.com/api/?background=random&name=${user.name}`"
                     alt=""
                     class="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
-                    v-if="user.name"
                 />
                 <div v-else>
                     <v-skeleton-loader type="avatar"></v-skeleton-loader>
                 </div>
                 <div class="flex flex-col leading-tight">
-                    <div class="text-2xl mt-1 flex items-center" v-if="user.name">
+                    <div v-if="user.name" class="text-2xl mt-1 flex items-center">
                         <span class="text-gray-700 mr-3">{{ user.name }}</span>
                         <span class="text-green-500">
                             <svg width="10" height="10">
@@ -227,13 +227,13 @@
                 chats: []
             }
         },
+        watch:{
+            '$route.query':'getMessage'
+        },
         mounted(){
             const el = document.getElementById("messages");
             el.scrollTop = el.scrollHeight;
             this.getMessage();
-        },
-        watch:{
-            '$route.query':'getMessage'
         },
         methods:{
             getMessage(){
