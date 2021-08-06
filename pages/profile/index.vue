@@ -213,7 +213,7 @@ export default {
             }
         },
         selectUser() {
-            this.allSelectedUser = false;
+            this.users.length === this.userIds.length ? this.allSelectedUser = true : this.allSelectedUser = false
         },
         cropImage() {
             // get image data for post processing, e.g. upload or setting image src
@@ -319,7 +319,7 @@ export default {
             console.log(this.selected_attachment)
         },
         removeAttachment(index){
-            this.attachment_files.splice(index, 1)
+            this.selected_attachment.splice(index, 1)
         },
         submittedAttachmentWithFile(){
             this.$axios.$post('upload-docs-file', {
