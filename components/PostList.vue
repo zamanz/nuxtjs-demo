@@ -1,7 +1,7 @@
 <template>
     <div class="post__list">
-        <div v-if="posts.length > 0" ref="postList">
-            <div v-for="(post) in posts" :key="post.id" class="card h-100 border-0 mb-3 bg-transparent post">
+        <div v-if="isLoadedPost" ref="postList">
+            <div v-for="(post) in posts.data" :key="post.id" class="card h-100 border-0 mb-3 bg-transparent post">
                 <div class="card-header d-flex justify-content-between p-0 mb-2 border-0 bg-transparent">
                     <a class="avatar d-flex align-items-center" href="#">
                         <img :src="`https://ui-avatars.com/api/?background=random&name=${post.user.name}`" class="img-circle" alt="Profile Image">
@@ -75,12 +75,13 @@
 </template>
 
 <script>
+import { debounce } from 'lodash/function'
 export default {
     name:'PostList',
     data(){
         return {
-            posts: [],
-            next_page: 2,
+            posts: {},
+            isLoadedPost: false,
             isLoding: false
         }
     },
@@ -88,37 +89,56 @@ export default {
         this.getInitialPosts();
     },
     mounted(){
-        window.addEventListener('scroll', this.getNextPosts)
+        this.isLoadedPost = true
+        window.addEventListener('scroll', debounce((e) =>{
+            this.getNextPosts()
+        },1000))
     },
     beforeDestroy(){
+        console.log('removeEventListener')
         window.removeEventListener('scroll', this.getNextPosts)
     },
     methods:{
         getInitialPosts() {
             this.$axios.$get('/posts').then((response) => {
-                this.posts = response.posts.data;                
+                this.posts = response.posts;                
             });
         },
         getNextPosts() {
-            
-            const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-            if (bottomOfWindow) {
+            const pixelsFromBottom = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight;
+            if(pixelsFromBottom < 150 && this.posts.next_page_url){
+                console.log('pixelsFromBottom', pixelsFromBottom)
                 this.isLoding = true;
-                const page = this.next_page++;
-                this.$axios.$get('/posts?page='+ page).then((response) => {
-                    this.posts.push(...response.posts.data)
+                this.$axios.$get(this.posts.next_page_url).then((response) => {
                     this.isLoding = false;
-                });
+                    this.posts = {
+                        ...response.posts,
+                        data: [
+                            ...this.posts.data,
+                            ...response.posts.data
+                        ]
+                    }
+                    console.log(response)
+                }).catch(error =>{
+                    console.log(error)
+                })
             }
         },
 
         loadMore() {
-            this.isLoding = true;
-            const page = this.next_page++;
-            this.$axios.$get('/posts?page='+ page).then((response) => {
-                this.posts.push(...response.posts.data)
-                this.isLoding = false;
-            });
+            if(this.posts.next_page_url){
+                this.isLoding = true;
+                this.$axios.$get(this.posts.next_page_url).then((response) => {
+                    this.posts = {
+                        ...response.posts,
+                        data: [
+                            ...this.posts.data,
+                            ...response.posts.data
+                        ]
+                    }
+                    console.log(response)
+                });
+            }
         }
 
     }
