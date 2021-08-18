@@ -12,7 +12,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-5 d-none d-lg-block">
+                <div class="col-lg-5 col-md-5 d-none d-md-block d-lg-block">
                     <form action="">
                         <div class="input-group">
                             <input type="text" class="form-control search__input__box" placeholder="সার্চ করুন">
@@ -25,7 +25,7 @@
                     </form>
                 </div>
 
-                <div class="col-lg-4 col-md-9">
+                <div class="col-lg-4 col-md-4">
                     <nav class="navbar navbar-expand py-0 d-flex justify-content-end">
                         <div id="navbarSupportedContent">
                             <ul class="navbar-nav">
