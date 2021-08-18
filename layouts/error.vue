@@ -6,9 +6,8 @@
                 <h3>Oops! Something went wrong.</h3>
                 <p>{{ error.message }}</p>
                 <div class="d-flex justify-content-center align-items-center">
-                    <a href="/" class="btn btn-success mx-2">Go to Home</a>
-                    <button type="button" class="btn btn-info mx-2 text-light" @click="reload">Reload</button>
-                    <button type="button" class="btn btn-secondary mx-2 text-light" @click="goBack">Go Back</button>
+                    <a href="/" class="btn btn-success mx-2 text-uppercase">Go to Home</a>
+                    <button type="button" class="btn btn-info mx-2 text-light text-uppercase" @click="reload">Reload</button>
                 </div>
             </div>
         </div>
@@ -29,9 +28,6 @@ export default {
     methods:{
         reload(){
             window.location.reload()
-        },
-        goBack(){
-            console.log('Go Back')
         }
     }
 
